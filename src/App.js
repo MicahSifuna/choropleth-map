@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import { MapContainer } from "react-leaflet";
+import Legend from "./components/Legend";
+import MapView from "./components/MapView";
+import "./App.css";
 
 function App() {
+  const mapRef = useRef();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <h1>Choropleth Map</h1> */}
+      <MapContainer
+        whenCreated={(map) => (mapRef.current = map)}
+        center={[-0.0236, 37.9062]}
+        zoom={6}
+        style={{ height: "100vh" }}
+      >
+        <MapView />
+        <Legend map={mapRef.current} />
+      </MapContainer>
     </div>
   );
 }
